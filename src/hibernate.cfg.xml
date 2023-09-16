@@ -42,21 +42,19 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <!---property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/mpv_aluno?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">mpv_aluno</property>
-    <property name="hibernate.connection.password">senha123</property>
-    <mapping class="bean.Grupo"/>
-    <mapping class="bean.OsProdutos"/>
-    <mapping class="bean.Vendedor"/>
-    <mapping class="bean.OsServicosId"/>
-    <mapping class="bean.VendasProdutos"/>
-    <mapping class="bean.Clientes"/>
-    <mapping class="bean.Produtos"/>
-    <mapping class="bean.Vendas"/>
-    <mapping class="bean.Servicos"/>
-    <mapping class="bean.Usuarios"/>
-    <mapping class="bean.Os"/>
-    <mapping class="bean.OsServicos"/>
+    <property name="hibernate.connection.password">senha123</property!-->
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_marcelo_nakasima?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"/>
+    <mapping class="bean.ClienteMyn"/>
+    <mapping class="bean.VendaprodutoMyn"/>
+    <mapping class="bean.VendasMyn"/>
+    <mapping class="bean.ProdutoMyn"/>
+    <mapping class="bean.FuncionarioMyn"/>
+    <mapping class="bean.UsuariosMyn"/>
   </session-factory>
 </hibernate-configuration>
