@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 14:42:42 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -37,14 +37,13 @@ public class ClienteMyn  implements java.io.Serializable {
      private String cidadeMyn;
      private String bairroMyn;
      private String numeroCasaMyn;
-     private String clienteMyncol;
-     private Set vendasMyns = new HashSet(0);
+     
 
     public ClienteMyn() {
     }
 
 	
-    public ClienteMyn(int idClienteMyn, String nomeMyn, String emailMyn, String senhaMyn, int sexoMyn, String cpfMyn, String rgMyn, String cepMyn, String clienteMyncol) {
+    public ClienteMyn(int idClienteMyn, String nomeMyn, String emailMyn, String senhaMyn, int sexoMyn, String cpfMyn, String rgMyn, String cepMyn) {
         this.idClienteMyn = idClienteMyn;
         this.nomeMyn = nomeMyn;
         this.emailMyn = emailMyn;
@@ -53,9 +52,8 @@ public class ClienteMyn  implements java.io.Serializable {
         this.cpfMyn = cpfMyn;
         this.rgMyn = rgMyn;
         this.cepMyn = cepMyn;
-        this.clienteMyncol = clienteMyncol;
     }
-    public ClienteMyn(int idClienteMyn, String nomeMyn, String apelidoMyn, String emailMyn, String senhaMyn, int sexoMyn, String celularMyn, String telefoneFixoMyn, String cpfMyn, String rgMyn, String cepMyn, String paisMyn, String estadoMyn, String cidadeMyn, String bairroMyn, String numeroCasaMyn, String clienteMyncol, Set vendasMyns) {
+    public ClienteMyn(int idClienteMyn, String nomeMyn, String apelidoMyn, String emailMyn, String senhaMyn, int sexoMyn, String celularMyn, String telefoneFixoMyn, String cpfMyn, String rgMyn, String cepMyn, String paisMyn, String estadoMyn, String cidadeMyn, String bairroMyn, String numeroCasaMyn, Set vendasMyns) {
        this.idClienteMyn = idClienteMyn;
        this.nomeMyn = nomeMyn;
        this.apelidoMyn = apelidoMyn;
@@ -71,9 +69,7 @@ public class ClienteMyn  implements java.io.Serializable {
        this.estadoMyn = estadoMyn;
        this.cidadeMyn = cidadeMyn;
        this.bairroMyn = bairroMyn;
-       this.numeroCasaMyn = numeroCasaMyn;
-       this.clienteMyncol = clienteMyncol;
-       this.vendasMyns = vendasMyns;
+       this.numeroCasaMyn = numeroCasaMyn; 
     }
    
      @Id 
@@ -237,32 +233,6 @@ public class ClienteMyn  implements java.io.Serializable {
     public void setNumeroCasaMyn(String numeroCasaMyn) {
         this.numeroCasaMyn = numeroCasaMyn;
     }
-
-    
-    @Column(name="Cliente_myncol", nullable=false, length=45)
-    public String getClienteMyncol() {
-        return this.clienteMyncol;
-    }
-    
-    public void setClienteMyncol(String clienteMyncol) {
-        this.clienteMyncol = clienteMyncol;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="clienteMyn")
-    public Set getVendasMyns() {
-        return this.vendasMyns;
-    }
-    
-    public void setVendasMyns(Set vendasMyns) {
-        this.vendasMyns = vendasMyns;
-    }
-    public ClienteMyn getIdCliente_myn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-
-
 
 }
 

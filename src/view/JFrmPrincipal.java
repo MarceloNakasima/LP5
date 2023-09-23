@@ -169,13 +169,13 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProdutosActionPerformed
         // TODO add your handling code here:
-        JDlgProduto jDlgProdutos = new JDlgProduto(null,true);
+        JDlgProdutoNovoIA jDlgProdutos = new JDlgProdutoNovoIA(null,true);
         jDlgProdutos.setVisible(true);
     }//GEN-LAST:event_jMnuProdutosActionPerformed
 
     private void jMnuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuFuncionariosActionPerformed
         // TODO add your handling code here:
-        JDlgFuncionario jDlgFuncionarios = new JDlgFuncionario(null, true);
+        JDlgFuncionarioNovo jDlgFuncionarios = new JDlgFuncionarioNovo(null, true);
         jDlgFuncionarios.setVisible(true);
         
     }//GEN-LAST:event_jMnuFuncionariosActionPerformed

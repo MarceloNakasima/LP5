@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 14:42:42 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -27,7 +27,7 @@ public class ProdutoMyn  implements java.io.Serializable {
      private double valorMyn;
      private int tamanhoMyn;
      private int categoriaMyn;
-     private Set vendaprodutoMyns = new HashSet(0);
+     
 
     public ProdutoMyn() {
     }
@@ -48,7 +48,7 @@ public class ProdutoMyn  implements java.io.Serializable {
        this.valorMyn = valorMyn;
        this.tamanhoMyn = tamanhoMyn;
        this.categoriaMyn = categoriaMyn;
-       this.vendaprodutoMyns = vendaprodutoMyns;
+     
     }
    
      @Id 
@@ -112,18 +112,6 @@ public class ProdutoMyn  implements java.io.Serializable {
     public void setCategoriaMyn(int categoriaMyn) {
         this.categoriaMyn = categoriaMyn;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="produtoMyn")
-    public Set getVendaprodutoMyns() {
-        return this.vendaprodutoMyns;
-    }
-    
-    public void setVendaprodutoMyns(Set vendaprodutoMyns) {
-        this.vendaprodutoMyns = vendaprodutoMyns;
-    }
-
-
-
 
 }
 

@@ -73,7 +73,7 @@ public class Util {
         return String.valueOf(num);
     }
 
-    public static Date StrDate(String cad) {
+    public static Date strDate(String cad) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return formato.parse(cad);

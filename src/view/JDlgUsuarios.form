@@ -174,9 +174,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFmtData">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFmtDataActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -184,9 +181,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFmtCpf">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFmtCpfActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -219,9 +213,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ativo"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCboAtivoActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnIncluir">
       <Properties>

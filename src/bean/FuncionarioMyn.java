@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 14:42:42 by Hibernate Tools 4.3.1
+// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,13 +33,14 @@ public class FuncionarioMyn  implements java.io.Serializable {
      private String rgMyn;
      private Date dataNascimentoMyn;
      private Date dataAdmissaoMyn;
-     private Set vendasMyns = new HashSet(0);    public FuncionarioMyn getIdFuncionario_myn;
-
+     
 
     public FuncionarioMyn() {
     }
 
-	
+    public FuncionarioMyn(int idFuncionarioMyn) {
+        this.idFuncionarioMyn = idFuncionarioMyn;
+    }
     public FuncionarioMyn(int idFuncionarioMyn, String nomeMyn, String emailMyn, String telefoneMyn, String enderecoMyn, String cpfMyn, String rgMyn, Date dataNascimentoMyn, Date dataAdmissaoMyn) {
         this.idFuncionarioMyn = idFuncionarioMyn;
         this.nomeMyn = nomeMyn;
@@ -50,18 +51,6 @@ public class FuncionarioMyn  implements java.io.Serializable {
         this.rgMyn = rgMyn;
         this.dataNascimentoMyn = dataNascimentoMyn;
         this.dataAdmissaoMyn = dataAdmissaoMyn;
-    }
-    public FuncionarioMyn(int idFuncionarioMyn, String nomeMyn, String emailMyn, String telefoneMyn, String enderecoMyn, String cpfMyn, String rgMyn, Date dataNascimentoMyn, Date dataAdmissaoMyn, Set vendasMyns) {
-       this.idFuncionarioMyn = idFuncionarioMyn;
-       this.nomeMyn = nomeMyn;
-       this.emailMyn = emailMyn;
-       this.telefoneMyn = telefoneMyn;
-       this.enderecoMyn = enderecoMyn;
-       this.cpfMyn = cpfMyn;
-       this.rgMyn = rgMyn;
-       this.dataNascimentoMyn = dataNascimentoMyn;
-       this.dataAdmissaoMyn = dataAdmissaoMyn;
-       this.vendasMyns = vendasMyns;
     }
    
      @Id 
@@ -155,22 +144,6 @@ public class FuncionarioMyn  implements java.io.Serializable {
     public void setDataAdmissaoMyn(Date dataAdmissaoMyn) {
         this.dataAdmissaoMyn = dataAdmissaoMyn;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="funcionarioMyn")
-    public Set getVendasMyns() {
-        return this.vendasMyns;
-    }
-    
-    public void setVendasMyns(Set vendasMyns) {
-        this.vendasMyns = vendasMyns;
-    }
-
-    public FuncionarioMyn getIdFuncionario_myn() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-
 
 }
 
