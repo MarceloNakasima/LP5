@@ -59,4 +59,33 @@ public class ProdutoMynDAO extends DAOAbstract{
         return (ArrayList) lista;
     }
     
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(ProdutoMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    
+    public List listDesc(String Desc){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(ProdutoMyn.class);
+        crit.add(Restrictions.like("descricaoMyn", "%"+Desc+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+      public List listNomeDesc(String nome, String Desc){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(ProdutoMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        crit.add(Restrictions.like("descricaoMyn", "%"+Desc+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    
+    }
 }

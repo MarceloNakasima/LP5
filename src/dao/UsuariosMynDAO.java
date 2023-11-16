@@ -60,4 +60,34 @@ public class UsuariosMynDAO extends DAOAbstract{
         return (ArrayList) lista;
     }
     
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(UsuariosMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    
+    public List listNivel(int nivel){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(UsuariosMyn.class);
+        crit.add(Restrictions.eq("nivelMyn", nivel));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+      public List listNomeNivel(String nome, int nivel){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(UsuariosMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        crit.add(Restrictions.eq("nivelMyn", nivel));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    
+    }
+    
 }

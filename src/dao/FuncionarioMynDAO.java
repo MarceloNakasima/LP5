@@ -6,8 +6,10 @@
 package dao;
 import bean.FuncionarioMyn;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 /**
  *
@@ -57,6 +59,35 @@ public class FuncionarioMynDAO extends DAOAbstract{
         List lista = criteria.list();
         session.getTransaction().commit();
         return (ArrayList) lista;
+    }
+    
+    
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(FuncionarioMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    
+   public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(FuncionarioMyn.class);
+        criteria.add(Restrictions.ge("dataAdmissaoMyn", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public List listNomeData(Date data, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(FuncionarioMyn.class);
+        criteria.add(Restrictions.ge("dataAdmissaoMyn", data));
+        criteria.add(Restrictions.ilike("nomeMyn", "%"+nome+"%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
     
 }

@@ -48,7 +48,7 @@ public class FuncionarioControle extends AbstractTableModel{
            return funcionarioMyn.getEmailMyn();
         } 
         if (columnIndex == 3) {
-           return funcionarioMyn.getCpfMyn();
+           return funcionarioMyn.getDataAdmissaoMyn();
         } 
         return "";
     }
@@ -65,7 +65,7 @@ public class FuncionarioControle extends AbstractTableModel{
             return "Email";
         }
         if (column == 3){
-            return "CPF";
+            return "Data";
         }
         
         return "";  

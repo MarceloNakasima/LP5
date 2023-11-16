@@ -47,7 +47,7 @@ private List lista;
            return usuariosMyn.getApelidoMyn();
         } 
         if (columnIndex == 3) {
-           return usuariosMyn.getCpfMyn();
+           return usuariosMyn.getNivelMyn();
         } 
         return "";
     }
@@ -64,7 +64,7 @@ private List lista;
             return "Apelido";
         }
         if (column == 3){
-            return "CPF";
+            return "Nivel";
         }
         
         return "";  

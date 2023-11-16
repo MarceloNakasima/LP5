@@ -382,8 +382,6 @@ public class JDlgCliente extends javax.swing.JDialog {
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtApelido, jTxtEmail, jFmtCpf, jCboSexo, jTxtPais, jTxtCelular, jTxtTelefone, jFmtRg, jFmtCep, jTxtEstado, jTxtCidade, jTxtBairro, jTxtNcasa, jPwfSenha);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);  
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jTxtEmail, jFmtCpf, jCboSexo, jTxtPais, 
-                 jTxtCelular, jTxtTelefone, jFmtRg, jFmtCep, jTxtEstado, jTxtCidade, jTxtBairro, jTxtNcasa, jPwfSenha);
         incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -403,7 +401,7 @@ public class JDlgCliente extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        ClienteMyn clienteMyn = viewBean();
+        clienteMyn = viewBean();
         
         if (incluindo == true) {
             clienteMynDAO.insert(clienteMyn);
@@ -414,7 +412,7 @@ public class JDlgCliente extends javax.swing.JDialog {
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jTxtEmail, jFmtCpf, jCboSexo, jTxtPais, jTxtCelular, jTxtTelefone, jFmtRg, jFmtCep, jTxtEstado, jTxtCidade, jTxtBairro, jTxtNcasa, jPwfSenha);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jTxtEmail, jFmtCpf, jCboSexo, jTxtPais, jTxtCelular, jTxtTelefone, jFmtRg, jFmtCep, jTxtEstado, jTxtCidade, jTxtBairro, jTxtNcasa, jPwfSenha);
-                                           
+            
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

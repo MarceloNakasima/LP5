@@ -48,7 +48,7 @@ public class ClienteControle extends AbstractTableModel{
            return clienteMyn.getApelidoMyn();
         } 
         if (columnIndex == 3) {
-           return clienteMyn.getCpfMyn();
+           return clienteMyn.getSexoMyn();
         } 
         return "";
     }
@@ -65,7 +65,7 @@ public class ClienteControle extends AbstractTableModel{
             return "Apelido";
         }
         if (column == 3){
-            return "CPF";
+            return "Sexo";
         }
         
         return "";  

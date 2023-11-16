@@ -60,4 +60,37 @@ public class ClienteMynDAO extends DAOAbstract{
         return (ArrayList) lista;
     }
     
+    public List listNome(String nome){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(ClienteMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+     
+
+    public List listSexo(int sexo){
+        
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(ClienteMyn.class);
+        crit.add(Restrictions.ge("sexoMyn", sexo));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    
+    }
+
+   public List listNomeSexo(String nome, int sexo){
+        
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(ClienteMyn.class);
+        crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
+        crit.add(Restrictions.ge("sexoMyn", sexo));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
 }
