@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
+// Generated 07/12/2023 11:31:50 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,6 +33,13 @@ public class VendasMyn  implements java.io.Serializable {
     public VendasMyn() {
     }
 
+	
+    public VendasMyn(int idVendasMyn, String nomeProdutoMyn, double valorMyn, Date dataMyn) {
+        this.idVendasMyn = idVendasMyn;
+        this.nomeProdutoMyn = nomeProdutoMyn;
+        this.valorMyn = valorMyn;
+        this.dataMyn = dataMyn;
+    }
     public VendasMyn(int idVendasMyn, ClienteMyn clienteMyn, FuncionarioMyn funcionarioMyn, String nomeProdutoMyn, double valorMyn, Date dataMyn) {
        this.idVendasMyn = idVendasMyn;
        this.clienteMyn = clienteMyn;
@@ -54,8 +61,8 @@ public class VendasMyn  implements java.io.Serializable {
         this.idVendasMyn = idVendasMyn;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_Cliente_myn", nullable=false)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Cliente_myn")
     public ClienteMyn getClienteMyn() {
         return this.clienteMyn;
     }
@@ -64,8 +71,8 @@ public class VendasMyn  implements java.io.Serializable {
         this.clienteMyn = clienteMyn;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_Funcionario_myn", nullable=false)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Funcionario_myn")
     public FuncionarioMyn getFuncionarioMyn() {
         return this.funcionarioMyn;
     }

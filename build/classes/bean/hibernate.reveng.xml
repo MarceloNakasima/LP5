@@ -41,10 +41,10 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="db_marcelo_nakasima"/>
+  <table-filter match-name="vendas_myn"/>
+  <table-filter match-name="funcionario_myn"/>
   <table-filter match-name="usuarios_myn"/>
   <table-filter match-name="cliente_myn"/>
   <table-filter match-name="vendaproduto_myn"/>
-  <table-filter match-name="funcionario_myn"/>
-  <table-filter match-name="vendas_myn"/>
   <table-filter match-name="produto_myn"/>
 </hibernate-reverse-engineering>

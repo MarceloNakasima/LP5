@@ -5,31 +5,62 @@
  */
 package view;
 
-import bean.Produto;
-import dao.Produto_DAO;
+import bean.ProdutoMyn;
+import bean.VendaprodutoMyn;
+import bean.VendasMyn;
+import dao.ProdutoMynDAO;
+import dao.VendaProdutoMynDAO;
+import dao.VendasMynDAO;
 import java.util.List;
+import tools.Util;
 
 /**
  *
  * @author User
  */
 public class JDlgVendasProduto extends javax.swing.JDialog {
+    public VendasMyn vendas;
+    public JDlgVendas jDlgVendas;
+    public ProdutoMyn produto;
+    public ProdutoMynDAO produtoMynDAO;
+    public VendasMynDAO VendasMynDAO; 
+    public VendaProdutoMynDAO vendaProdutoMynDAO;
+    public VendaprodutoMyn vendaProdutoMyn;
+    
 
-    /**
-     * Creates new form JDlgVendasProduto
-     */
     public JDlgVendasProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Vendas de Produto");
         setLocationRelativeTo(null);
-        Produto_DAO produto_DAO = new Produto_DAO();
-        List lista = produto_DAO.listAll();
+        Util.habilitar(false,  jTxtTotal);
+        setTitle("Produtos do pedido");
+        produtoMynDAO = new ProdutoMynDAO();
+        List lista = produtoMynDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
-            Produto produto = (Produto) lista.get(i);
-            jCboProduto.addItem(produto);   
+            produto= (ProdutoMyn) lista.get(i);
+            jCboProdutos.addItem(produto);
         }
     }
+
+    public void setTelaAnterior(JDlgVendas jDlgVendas) {
+        this.jDlgVendas = jDlgVendas;
+    }
+    
+     public void beanView(VendaprodutoMyn vendaprodutoMyn) {
+        jTxtQuantidade.setText(Util.intStr(vendaprodutoMyn.getQuantidadeMyn()));
+        jCboProdutos.setSelectedItem(vendaprodutoMyn.getProdutoMyn());
+        jTxtValorU.setText(Util.doubleStr(vendaprodutoMyn.getValorUnitarioMyn()));
+    }
+     
+//     public VendaprodutoMyn viewBean(){
+//        vendaprodutoMyn.setQuantidadeMyn(Util.strInt(jTxtQuantidade.getText()));
+//        vendaprodutoMyn.setValorUnitarioMyn(jTxtValorU.getText());
+//        vendaprodutoMyn.setProdutoMyn((ProdutoMyn)jCboProdutos.getSelectedItem());
+//
+//        
+//        return vendaprodutoMyn;
+//        }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,21 +72,46 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jCboProduto = new javax.swing.JComboBox<Produto>();
+        jCboProdutos = new javax.swing.JComboBox<ProdutoMyn>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTxtQuantidade = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTxtValorU = new javax.swing.JTextField();
         jBtnConfirmar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTxtTotal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Produto");
 
+        jCboProdutos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCboProdutosItemStateChanged(evt);
+            }
+        });
+
         jLabel2.setText("Quantidade");
 
+        jTxtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtQuantidadeKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("Valor Unitário");
+
+        jTxtValorU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtValorUActionPerformed(evt);
+            }
+        });
+        jTxtValorU.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtValorUKeyReleased(evt);
+            }
+        });
 
         jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/imagens/gravar.png"))); // NOI18N
         jBtnConfirmar.setText("Confirmar");
@@ -73,31 +129,38 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
             }
         });
 
+        jLabel4.setText("Total");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCboProduto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jTxtValorU, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jBtnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(13, 13, 13))))
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jTxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1)
+                    .addComponent(jCboProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jBtnConfirmar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,48 +168,82 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCboProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtValorU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnConfirmar)
                     .addComponent(jBtnCancelar))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-//        // TODO add your handling code here:
-//        Cliente cliente = viewBean();
-//        Cliente_DAO cliente_DAO = new Cliente_DAO();
-//
-//        if(incluindo == true){
-//            cliente_DAO.insert(cliente);
-//        } else{
-//            cliente_DAO.update(cliente);
-//            JOptionPane.showMessageDialog(null, "Alteração feita com sucesso!.");
-//        }
-//
-//        desabilitar();
-//        limparCampos();
+        vendaProdutoMyn = new VendaprodutoMyn();
+        vendaProdutoMyn.setProdutoMyn( (ProdutoMyn) jCboProdutos.getSelectedItem() );
+        vendaProdutoMyn.setQuantidadeMyn( Util.strInt(jTxtQuantidade.getText() ));
+        vendaProdutoMyn.setValorUnitarioMyn(Util.strDouble(jTxtValorU.getText()));
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+           jDlgVendas.vendaProdutoControle.addBean(vendaProdutoMyn);
+        } else {            
+            jDlgVendas.vendaProdutoControle.updateBean(jDlgVendas.getSelectedRowProd(), vendaProdutoMyn);
+        }
+        setVisible(false);
+   
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-//        desabilitar();
-//        limparCampos();
-          this.hide();
+        Util.mensagem("Cancelamento concluido");
+        setVisible(false);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jCboProdutosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCboProdutosItemStateChanged
+        if(jCboProdutos.getSelectedIndex() != -1){
+        jTxtQuantidade.setText("1");
+        ProdutoMyn produtoMyn = (ProdutoMyn) jCboProdutos.getSelectedItem();
+        jTxtValorU.setText(Util.doubleStr(produtoMyn.getValorMyn()));
+        
+      }
+    }//GEN-LAST:event_jCboProdutosItemStateChanged
+
+    private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
+        if(jTxtQuantidade.getText().isEmpty() == false){
+        double unitario = Util.strDouble(jTxtValorU.getText());
+        double quantidade = Util.strDouble(jTxtQuantidade.getText());
+        jTxtTotal.setText(Util.doubleStr(quantidade * unitario));
+        }
+        else{
+        jTxtTotal.setText("0");
+        }
+    }//GEN-LAST:event_jTxtQuantidadeKeyReleased
+
+    private void jTxtValorUKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtValorUKeyReleased
+        if(jTxtQuantidade.getText().isEmpty() == false){
+        double unitario = Util.strDouble(jTxtValorU.getText());
+        double quantidade = Util.strDouble(jTxtQuantidade.getText());
+        jTxtTotal.setText(Util.doubleStr(quantidade * unitario));
+        }
+        else{
+        jTxtTotal.setText("0");
+        }
+    }//GEN-LAST:event_jTxtValorUKeyReleased
+
+    private void jTxtValorUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtValorUActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtValorUActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,11 +291,13 @@ public class JDlgVendasProduto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnConfirmar;
-    private javax.swing.JComboBox<Produto> jCboProduto;
+    private javax.swing.JComboBox<ProdutoMyn> jCboProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTxtQuantidade;
+    private javax.swing.JTextField jTxtTotal;
+    private javax.swing.JTextField jTxtValorU;
     // End of variables declaration//GEN-END:variables
 }

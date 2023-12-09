@@ -254,9 +254,8 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMnuFuncionariosActionPerformed
 
     private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
-        // TODO add your handling code here:
-//        JDlgVendas jDlgVendas = new JDlgVendas(null, true);
-//        jDlgVendas.setVisible(true);
+        JDlgVendas jDlgVendas = new JDlgVendas(null, true);
+        jDlgVendas.setVisible(true);
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
     private void jBtnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUsuarioActionPerformed

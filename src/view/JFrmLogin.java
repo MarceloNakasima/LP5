@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.UsuariosMyn;
+import dao.UsuariosMynDAO;
 import javax.swing.JOptionPane;
 /**
  *
@@ -117,40 +119,26 @@ public class JFrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSairActionPerformed
 
     private void jBtnAcessar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAcessar1ActionPerformed
-        // TODO add your handling code here: 
-    
+        String usuario = jTxtUsuario.getText();
+        String senha = jPwfSenha.getText();
+        UsuariosMynDAO usuariosMynDAO = new UsuariosMynDAO();
+        UsuariosMyn usuarios = usuariosMynDAO.login(usuario, senha);
 
-        
-        if(jTxtUsuario.getText().contains("marcelo") && jPwfSenha.getText().contains("123")){
+        if (usuarios != null) {
             JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
             JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
             jFrmPrincipal.setVisible(true);
-        }
-        
-        if(jTxtUsuario.getText().contains("gustavo") && jPwfSenha.getText().contains("123")){
-            JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
-            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
-            jFrmPrincipal.setVisible(true);
-        }
-        
-        if(jTxtUsuario.getText().contains("admin") && jPwfSenha.getText().contains("123")){
-            JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
-            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
-            jFrmPrincipal.setVisible(true);
-  
-            
         } else {
             contadorTentativas++;
-            JOptionPane.showMessageDialog(null, "Login incorreto! Tentativa " + contadorTentativas + " de 3","LOGIN INCORRETO",JOptionPane.ERROR_MESSAGE);
-            
-            if (contadorTentativas >= 3) {
-                JOptionPane.showMessageDialog(null, "Você alcançou o número máximo de tentativas.","TENTATIVAS MÁXIMAS",JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
+            JOptionPane.showMessageDialog(null, "Login incorreto! Tentativa " + contadorTentativas + " de 3", "LOGIN INCORRETO", JOptionPane.ERROR_MESSAGE);
 
-        this.dispose();
-            
-       }
-     }       
+            if (contadorTentativas >= 3) {
+                JOptionPane.showMessageDialog(null, "Você alcançou o número máximo de tentativas.", "TENTATIVAS MÁXIMAS", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+                this.dispose();
+
+            }
+        }   
     }//GEN-LAST:event_jBtnAcessar1ActionPerformed
 
     /**

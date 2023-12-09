@@ -21,6 +21,7 @@ public class JDlgProdutoNovo extends javax.swing.JDialog {
     ProdutoMyn  produtoMyn;
     ProdutoControle produtoControle;
     private JDlgProdutoNovoIA jDlgProdutoNovoIA;
+   
 
     /**
      * Creates new form JDlgUsuariosNovo
@@ -132,6 +133,11 @@ public class JDlgProdutoNovo extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         jDlgProdutoNovoIA.setTitle("Alteração");
+        int sel = jTable1.getSelectedRow();
+        produtoMyn = produtoControle.getBean(sel);
+        jDlgProdutoNovoIA.beanView(produtoMyn);
+        List lista = produtoMynDAO.listAll();
+        produtoControle.setList(lista);
         jDlgProdutoNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 

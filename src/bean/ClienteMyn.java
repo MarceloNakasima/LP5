@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
+// Generated 07/12/2023 11:31:50 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -43,15 +43,23 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
 	
-    public ClienteMyn(int idClienteMyn, String nomeMyn, String emailMyn, String senhaMyn, int sexoMyn, String cpfMyn, String rgMyn, String cepMyn) {
+    public ClienteMyn(int idClienteMyn, String nomeMyn, String apelidoMyn, String emailMyn, String senhaMyn, int sexoMyn, String celularMyn, String telefoneFixoMyn, String cpfMyn, String rgMyn, String cepMyn, String paisMyn, String estadoMyn, String cidadeMyn, String bairroMyn, String numeroCasaMyn) {
         this.idClienteMyn = idClienteMyn;
         this.nomeMyn = nomeMyn;
+        this.apelidoMyn = apelidoMyn;
         this.emailMyn = emailMyn;
         this.senhaMyn = senhaMyn;
         this.sexoMyn = sexoMyn;
+        this.celularMyn = celularMyn;
+        this.telefoneFixoMyn = telefoneFixoMyn;
         this.cpfMyn = cpfMyn;
         this.rgMyn = rgMyn;
         this.cepMyn = cepMyn;
+        this.paisMyn = paisMyn;
+        this.estadoMyn = estadoMyn;
+        this.cidadeMyn = cidadeMyn;
+        this.bairroMyn = bairroMyn;
+        this.numeroCasaMyn = numeroCasaMyn;
     }
     public ClienteMyn(int idClienteMyn, String nomeMyn, String apelidoMyn, String emailMyn, String senhaMyn, int sexoMyn, String celularMyn, String telefoneFixoMyn, String cpfMyn, String rgMyn, String cepMyn, String paisMyn, String estadoMyn, String cidadeMyn, String bairroMyn, String numeroCasaMyn, Set vendasMyns) {
        this.idClienteMyn = idClienteMyn;
@@ -69,7 +77,8 @@ public class ClienteMyn  implements java.io.Serializable {
        this.estadoMyn = estadoMyn;
        this.cidadeMyn = cidadeMyn;
        this.bairroMyn = bairroMyn;
-       this.numeroCasaMyn = numeroCasaMyn; 
+       this.numeroCasaMyn = numeroCasaMyn;
+
     }
    
      @Id 
@@ -95,7 +104,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="apelido_myn", length=45)
+    @Column(name="apelido_myn", nullable=false, length=45)
     public String getApelidoMyn() {
         return this.apelidoMyn;
     }
@@ -105,7 +114,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="email_myn", nullable=false, length=45)
+    @Column(name="email_myn", nullable=false, length=50)
     public String getEmailMyn() {
         return this.emailMyn;
     }
@@ -115,7 +124,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="senha_myn", nullable=false, length=45)
+    @Column(name="senha_myn", nullable=false, length=20)
     public String getSenhaMyn() {
         return this.senhaMyn;
     }
@@ -135,7 +144,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="celular_myn", length=45)
+    @Column(name="celular_myn", nullable=false, length=15)
     public String getCelularMyn() {
         return this.celularMyn;
     }
@@ -145,7 +154,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="telefoneFixo_myn", length=45)
+    @Column(name="telefoneFixo_myn", nullable=false, length=15)
     public String getTelefoneFixoMyn() {
         return this.telefoneFixoMyn;
     }
@@ -155,7 +164,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf_myn", nullable=false, length=45)
+    @Column(name="cpf_myn", nullable=false, length=20)
     public String getCpfMyn() {
         return this.cpfMyn;
     }
@@ -175,7 +184,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="cep_myn", nullable=false, length=45)
+    @Column(name="cep_myn", nullable=false, length=20)
     public String getCepMyn() {
         return this.cepMyn;
     }
@@ -185,7 +194,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="pais_myn", length=45)
+    @Column(name="pais_myn", nullable=false, length=45)
     public String getPaisMyn() {
         return this.paisMyn;
     }
@@ -195,7 +204,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="estado_myn", length=45)
+    @Column(name="estado_myn", nullable=false, length=2)
     public String getEstadoMyn() {
         return this.estadoMyn;
     }
@@ -205,7 +214,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="cidade_myn", length=45)
+    @Column(name="cidade_myn", nullable=false, length=45)
     public String getCidadeMyn() {
         return this.cidadeMyn;
     }
@@ -215,7 +224,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="bairro_myn", length=45)
+    @Column(name="bairro_myn", nullable=false, length=45)
     public String getBairroMyn() {
         return this.bairroMyn;
     }
@@ -225,7 +234,7 @@ public class ClienteMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="numeroCasa_myn", length=45)
+    @Column(name="numeroCasa_myn", nullable=false, length=5)
     public String getNumeroCasaMyn() {
         return this.numeroCasaMyn;
     }
@@ -233,7 +242,21 @@ public class ClienteMyn  implements java.io.Serializable {
     public void setNumeroCasaMyn(String numeroCasaMyn) {
         this.numeroCasaMyn = numeroCasaMyn;
     }
-
-}
+    
+     @Override
+    public String toString() {
+        return getNomeMyn();
+    }
+    
+    public boolean equals (Object object) {
+    if (object instanceof ClienteMyn) {
+        ClienteMyn clienteMyn = (ClienteMyn) object;
+        
+        if (this.getIdClienteMyn()== clienteMyn.getIdClienteMyn()){
+            return true;
+        }
+    }
+    return false;
+    }}
 
 

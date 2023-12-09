@@ -12,7 +12,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,8 +36,6 @@ public class Util {
                 ((JComboBox) componente).setSelectedIndex(-1);
             } else if (componente instanceof JCheckBox) { //if pergunta se alguma vez ele já foi textfield
                 ((JCheckBox) componente).setSelected(false);
-                //     JTextField objeto = (JTextField) componente;//criou um novo objeto e atribui ao objeto se ja tiver sido textfield
-                //      objeto.setText(""); //cast pegando o component e transformando em textfield
             }
 
         }

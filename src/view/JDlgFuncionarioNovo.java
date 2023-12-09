@@ -132,6 +132,11 @@ public class JDlgFuncionarioNovo extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         jDlgFuncionarioNovoIA.setTitle("Alteração");
+        int sel = jTable1.getSelectedRow();
+        funcionarioMyn = funcionarioControle.getBean(sel);
+        jDlgFuncionarioNovoIA.beanView(funcionarioMyn);
+        List lista = funcionarioMynDAO.listAll();
+        funcionarioControle.setList(lista);
         jDlgFuncionarioNovoIA.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 

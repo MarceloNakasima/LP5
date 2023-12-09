@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
+// Generated 07/12/2023 11:31:50 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,14 +33,11 @@ public class FuncionarioMyn  implements java.io.Serializable {
      private String rgMyn;
      private Date dataNascimentoMyn;
      private Date dataAdmissaoMyn;
-     
 
     public FuncionarioMyn() {
     }
 
-    public FuncionarioMyn(int idFuncionarioMyn) {
-        this.idFuncionarioMyn = idFuncionarioMyn;
-    }
+	
     public FuncionarioMyn(int idFuncionarioMyn, String nomeMyn, String emailMyn, String telefoneMyn, String enderecoMyn, String cpfMyn, String rgMyn, Date dataNascimentoMyn, Date dataAdmissaoMyn) {
         this.idFuncionarioMyn = idFuncionarioMyn;
         this.nomeMyn = nomeMyn;
@@ -51,6 +48,17 @@ public class FuncionarioMyn  implements java.io.Serializable {
         this.rgMyn = rgMyn;
         this.dataNascimentoMyn = dataNascimentoMyn;
         this.dataAdmissaoMyn = dataAdmissaoMyn;
+    }
+    public FuncionarioMyn(int idFuncionarioMyn, String nomeMyn, String emailMyn, String telefoneMyn, String enderecoMyn, String cpfMyn, String rgMyn, Date dataNascimentoMyn, Date dataAdmissaoMyn, Set vendaprodutoMyns, Set vendasMyns) {
+       this.idFuncionarioMyn = idFuncionarioMyn;
+       this.nomeMyn = nomeMyn;
+       this.emailMyn = emailMyn;
+       this.telefoneMyn = telefoneMyn;
+       this.enderecoMyn = enderecoMyn;
+       this.cpfMyn = cpfMyn;
+       this.rgMyn = rgMyn;
+       this.dataNascimentoMyn = dataNascimentoMyn;
+       this.dataAdmissaoMyn = dataAdmissaoMyn;
     }
    
      @Id 
@@ -86,7 +94,7 @@ public class FuncionarioMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="telefone_myn", nullable=false, length=45)
+    @Column(name="telefone_myn", nullable=false, length=20)
     public String getTelefoneMyn() {
         return this.telefoneMyn;
     }
@@ -106,7 +114,7 @@ public class FuncionarioMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf_myn", nullable=false, length=45)
+    @Column(name="cpf_myn", nullable=false, length=20)
     public String getCpfMyn() {
         return this.cpfMyn;
     }
@@ -116,7 +124,7 @@ public class FuncionarioMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="rg_myn", nullable=false, length=45)
+    @Column(name="rg_myn", nullable=false, length=25)
     public String getRgMyn() {
         return this.rgMyn;
     }
@@ -144,7 +152,21 @@ public class FuncionarioMyn  implements java.io.Serializable {
     public void setDataAdmissaoMyn(Date dataAdmissaoMyn) {
         this.dataAdmissaoMyn = dataAdmissaoMyn;
     }
-
-}
+    
+     @Override
+    public String toString() {
+        return getNomeMyn();
+    }
+    
+    public boolean equals (Object object) {
+    if (object instanceof FuncionarioMyn) {
+        FuncionarioMyn funcionarioMyn = (FuncionarioMyn) object;
+        
+        if (this.getIdFuncionarioMyn()== funcionarioMyn.getIdFuncionarioMyn()){
+            return true;
+        }
+    }
+    return false;
+    }}
 
 

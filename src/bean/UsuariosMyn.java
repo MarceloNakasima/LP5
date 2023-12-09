@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
+// Generated 07/12/2023 11:31:50 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -56,7 +56,7 @@ public class UsuariosMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="nome_myn", nullable=false, length=45)
+    @Column(name="nome_myn", nullable=false, length=50)
     public String getNomeMyn() {
         return this.nomeMyn;
     }
@@ -66,7 +66,7 @@ public class UsuariosMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="apelido_myn", nullable=false, length=45)
+    @Column(name="apelido_myn", nullable=false, length=25)
     public String getApelidoMyn() {
         return this.apelidoMyn;
     }
@@ -76,7 +76,7 @@ public class UsuariosMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="cpf_myn", nullable=false, length=45)
+    @Column(name="cpf_myn", nullable=false, length=15)
     public String getCpfMyn() {
         return this.cpfMyn;
     }
@@ -96,7 +96,7 @@ public class UsuariosMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="senha_myn", nullable=false, length=45)
+    @Column(name="senha_myn", nullable=false, length=30)
     public String getSenhaMyn() {
         return this.senhaMyn;
     }

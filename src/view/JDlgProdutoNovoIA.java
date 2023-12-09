@@ -211,9 +211,16 @@ public class JDlgProdutoNovoIA extends javax.swing.JDialog {
     }//GEN-LAST:event_jTxtValorActionPerformed
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        ProdutoMyn produtoMyn = viewBean();
-        produtoMynDAO.insert(produtoMyn);
-        setVisible(false);              
+        produtoMyn = viewBean();
+        produtoMynDAO = new ProdutoMynDAO();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+            produtoMynDAO.insert(produtoMyn);
+        } else {
+            produtoMynDAO.update(produtoMyn);
+        }
+
+        setVisible(false);
+        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtDesc, jTxtValor, jCboTamanho, jCboCategoria);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

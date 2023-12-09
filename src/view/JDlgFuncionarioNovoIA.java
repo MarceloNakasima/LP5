@@ -243,8 +243,13 @@ public class JDlgFuncionarioNovoIA extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        FuncionarioMyn funcionarioMyn = viewBean();
-        funcionarioMynDAO.insert(funcionarioMyn);
+        funcionarioMyn = viewBean();
+        funcionarioMynDAO = new FuncionarioMynDAO();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+            funcionarioMynDAO.insert(funcionarioMyn);
+        } else {
+            funcionarioMynDAO.update(funcionarioMyn);
+        }
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 

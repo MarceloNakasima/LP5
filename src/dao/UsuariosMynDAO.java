@@ -89,5 +89,15 @@ public class UsuariosMynDAO extends DAOAbstract{
         return lista;
     
     }
+      
+      public UsuariosMyn login(String usuarios, String senha){
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(UsuariosMyn.class);
+    criteria.add(Restrictions.eq("nomeMyn", usuarios));
+    criteria.add(Restrictions.eq("senhaMyn", senha));
+    UsuariosMyn aprovado = (UsuariosMyn) criteria.uniqueResult();
+    session.getTransaction().commit();
+        return aprovado;
+    } 
     
 }

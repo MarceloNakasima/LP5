@@ -1,10 +1,12 @@
 package bean;
-// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
+// Generated 07/12/2023 11:31:50 by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,21 +23,29 @@ public class VendaprodutoMyn  implements java.io.Serializable {
 
 
      private int idVendaProdutoMyn;
+     private VendasMyn vendasMyn;
      private ProdutoMyn produtoMyn;
      private int quantidadeMyn;
-     private String valorUnitarioMyn;
+     private double valorUnitarioMyn;
 
     public VendaprodutoMyn() {
     }
 
-    public VendaprodutoMyn(int idVendaProdutoMyn, ProdutoMyn produtoMyn, int quantidadeMyn, String valorUnitarioMyn) {
+	
+    public VendaprodutoMyn(int idVendaProdutoMyn, int quantidadeMyn, double valorUnitarioMyn) {
+        this.idVendaProdutoMyn = idVendaProdutoMyn;
+        this.quantidadeMyn = quantidadeMyn;
+        this.valorUnitarioMyn = valorUnitarioMyn;
+    }
+    public VendaprodutoMyn(int idVendaProdutoMyn, VendasMyn vendasMyn, ProdutoMyn produtoMyn, int quantidadeMyn, double valorUnitarioMyn) {
        this.idVendaProdutoMyn = idVendaProdutoMyn;
+       this.vendasMyn = vendasMyn;
        this.produtoMyn = produtoMyn;
        this.quantidadeMyn = quantidadeMyn;
        this.valorUnitarioMyn = valorUnitarioMyn;
     }
    
-     @Id 
+     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     
     @Column(name="idVendaProduto_myn", unique=true, nullable=false)
@@ -47,8 +57,18 @@ public class VendaprodutoMyn  implements java.io.Serializable {
         this.idVendaProdutoMyn = idVendaProdutoMyn;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="fk_Produto_myn", nullable=false)
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Vendas_myn")
+    public VendasMyn getVendasMyn() {
+        return this.vendasMyn;
+    }
+    
+    public void setVendasMyn(VendasMyn vendasMyn) {
+        this.vendasMyn = vendasMyn;
+    }
+
+@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="fk_Produto_myn")
     public ProdutoMyn getProdutoMyn() {
         return this.produtoMyn;
     }
@@ -58,7 +78,7 @@ public class VendaprodutoMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="quantidade_myn", nullable=false)
+    @Column(name="quantidade_myn", nullable=false, length=45)
     public int getQuantidadeMyn() {
         return this.quantidadeMyn;
     }
@@ -68,12 +88,12 @@ public class VendaprodutoMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="valorUnitario_myn", nullable=false, length=45)
-    public String getValorUnitarioMyn() {
+    @Column(name="valorUnitario_myn", nullable=false, precision=22, scale=0)
+    public double getValorUnitarioMyn() {
         return this.valorUnitarioMyn;
     }
     
-    public void setValorUnitarioMyn(String valorUnitarioMyn) {
+    public void setValorUnitarioMyn(double valorUnitarioMyn) {
         this.valorUnitarioMyn = valorUnitarioMyn;
     }
 

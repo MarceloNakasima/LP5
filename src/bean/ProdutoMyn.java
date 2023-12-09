@@ -1,5 +1,5 @@
 package bean;
-// Generated 21/09/2023 18:10:17 by Hibernate Tools 4.3.1
+// Generated 07/12/2023 11:31:50 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -48,7 +48,6 @@ public class ProdutoMyn  implements java.io.Serializable {
        this.valorMyn = valorMyn;
        this.tamanhoMyn = tamanhoMyn;
        this.categoriaMyn = categoriaMyn;
-     
     }
    
      @Id 
@@ -64,7 +63,7 @@ public class ProdutoMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="nome_myn", nullable=false, length=45)
+    @Column(name="nome_myn", nullable=false, length=30)
     public String getNomeMyn() {
         return this.nomeMyn;
     }
@@ -74,7 +73,7 @@ public class ProdutoMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="descricao_myn", nullable=false, length=150)
+    @Column(name="descricao_myn", nullable=false, length=100)
     public String getDescricaoMyn() {
         return this.descricaoMyn;
     }
@@ -112,7 +111,10 @@ public class ProdutoMyn  implements java.io.Serializable {
     public void setCategoriaMyn(int categoriaMyn) {
         this.categoriaMyn = categoriaMyn;
     }
-
+     @Override
+     public String toString(){
+    return getNomeMyn();
+    }
 }
 
 
