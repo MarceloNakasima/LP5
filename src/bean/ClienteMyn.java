@@ -257,6 +257,8 @@ public class ClienteMyn  implements java.io.Serializable {
         }
     }
     return false;
-    }}
+    }
+
+}
 
 

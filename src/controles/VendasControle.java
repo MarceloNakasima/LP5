@@ -41,10 +41,10 @@ private List lista;
            return vendasMyn.getIdVendasMyn();
         } 
         if (columnIndex == 1) {
-           return vendasMyn.getNomeProdutoMyn();
+           return vendasMyn.getTempoEntregaMyn();
         } 
         if (columnIndex == 2) {
-           return vendasMyn.getValorMyn();
+           return vendasMyn.getClienteMyn();
         } 
         return "";
     }
@@ -55,10 +55,10 @@ private List lista;
             return "Id";
         }
         if (column == 1){
-            return "Nome do Produto";
+            return "Tempo de Entrega";
         }
         if (column == 2){
-            return "Valor";
+            return "Cliente";
         }
         
         return "";  

@@ -26,7 +26,7 @@ public class VendasMyn  implements java.io.Serializable {
      private int idVendasMyn;
      private ClienteMyn clienteMyn;
      private FuncionarioMyn funcionarioMyn;
-     private String nomeProdutoMyn;
+     private String tempoEntregaMyn;
      private double valorMyn;
      private Date dataMyn;
 
@@ -34,17 +34,17 @@ public class VendasMyn  implements java.io.Serializable {
     }
 
 	
-    public VendasMyn(int idVendasMyn, String nomeProdutoMyn, double valorMyn, Date dataMyn) {
+    public VendasMyn(int idVendasMyn, String tempoEntregaMyn, double valorMyn, Date dataMyn) {
         this.idVendasMyn = idVendasMyn;
-        this.nomeProdutoMyn = nomeProdutoMyn;
+        this.tempoEntregaMyn = tempoEntregaMyn;
         this.valorMyn = valorMyn;
         this.dataMyn = dataMyn;
     }
-    public VendasMyn(int idVendasMyn, ClienteMyn clienteMyn, FuncionarioMyn funcionarioMyn, String nomeProdutoMyn, double valorMyn, Date dataMyn) {
+    public VendasMyn(int idVendasMyn, ClienteMyn clienteMyn, FuncionarioMyn funcionarioMyn, String tempoEntregaMyn, double valorMyn, Date dataMyn) {
        this.idVendasMyn = idVendasMyn;
        this.clienteMyn = clienteMyn;
        this.funcionarioMyn = funcionarioMyn;
-       this.nomeProdutoMyn = nomeProdutoMyn;
+       this.tempoEntregaMyn = tempoEntregaMyn;
        this.valorMyn = valorMyn;
        this.dataMyn = dataMyn;
     }
@@ -82,13 +82,13 @@ public class VendasMyn  implements java.io.Serializable {
     }
 
     
-    @Column(name="nomeProduto_myn", nullable=false, length=45)
-    public String getNomeProdutoMyn() {
-        return this.nomeProdutoMyn;
+    @Column(name="tempoEntrega_myn", nullable=false, length=45)
+    public String getTempoEntregaMyn() {
+        return this.tempoEntregaMyn;
     }
     
-    public void setNomeProdutoMyn(String nomeProdutoMyn) {
-        this.nomeProdutoMyn = nomeProdutoMyn;
+    public void setTempoEntregaMyn(String tempoEntregaMyn) {
+        this.tempoEntregaMyn = tempoEntregaMyn;
     }
 
     
@@ -110,9 +110,6 @@ public class VendasMyn  implements java.io.Serializable {
     public void setDataMyn(Date dataMyn) {
         this.dataMyn = dataMyn;
     }
-
-
-
 
 }
 

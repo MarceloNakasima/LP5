@@ -54,9 +54,9 @@ public class JDlgVendas extends javax.swing.JDialog {
         setTitle("Cadastro de Venda");
         setLocationRelativeTo(null);
 
-        Util.habilitar(false, jTxtCodigo, jFmtData, jCboCliente, jCboFuncionario, jTxtNome, jTxtValor, jBtnCancelar, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboCliente, jCboFuncionario, jTxtTempoE, jTxtValor, jBtnCancelar, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
-        Util.limparCampos(jTxtCodigo, jFmtData, jCboCliente, jCboFuncionario, jTxtNome, jTxtValor);
+        Util.limparCampos(jTxtCodigo, jFmtData, jCboCliente, jCboFuncionario, jTxtTempoE, jTxtValor);
 
         ClienteMynDAO clienteMynDAO = new ClienteMynDAO();
         List listaCbo = clienteMynDAO.listAll();
@@ -83,7 +83,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     public VendasMyn viewBean() {
         VendasMyn vendasMyn = new VendasMyn();
         vendasMyn.setIdVendasMyn(Integer.parseInt(jTxtCodigo.getText()));
-        vendasMyn.setNomeProdutoMyn(jTxtNome.getText());
+        vendasMyn.setTempoEntregaMyn(jTxtTempoE.getText());
         vendasMyn.setDataMyn(Util.strDate(jFmtData.getText()));
         vendasMyn.setValorMyn(Util.strDouble(jTxtValor.getText()));
         vendasMyn.setClienteMyn((ClienteMyn) jCboCliente.getSelectedItem());
@@ -93,7 +93,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     public void beanView(VendasMyn vendasMyn) {
         jTxtCodigo.setText(String.valueOf(vendasMyn.getIdVendasMyn()));
-        jTxtNome.setText(String.valueOf(vendasMyn.getNomeProdutoMyn()));
+        jTxtTempoE.setText(String.valueOf(vendasMyn.getTempoEntregaMyn()));
         jTxtValor.setText(String.valueOf(vendasMyn.getValorMyn()));
         jFmtData.setText(Util.dateStr(vendasMyn.getDataMyn()));
         jCboCliente.setSelectedItem(vendasMyn.getClienteMyn());
@@ -123,7 +123,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         jTxtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTxtNome = new javax.swing.JTextField();
+        jTxtTempoE = new javax.swing.JTextField();
         jTxtValor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jFmtData = new javax.swing.JFormattedTextField();
@@ -158,7 +158,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Nome do Produto");
+        jLabel2.setText("Tempo de entrega");
 
         jLabel3.setText("Valor");
 
@@ -251,7 +251,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTxtTempoE, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,7 +307,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtTempoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -367,16 +367,16 @@ public class JDlgVendas extends javax.swing.JDialog {
             }
         }
         vendaProdutoControle.setList(new ArrayList());
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
+        Util.habilitar(false, jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
+        Util.limparCampos(jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
+        Util.habilitar(false, jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
+        Util.limparCampos(jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
         vendaProdutoControle.setList(new ArrayList());
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
@@ -388,10 +388,10 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
+        Util.habilitar(true, jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
 
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario);
+        Util.limparCampos(jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario);
 
         vendaProdutoControle.setList(new ArrayList());
         jTxtCodigo.grabFocus();
@@ -410,7 +410,7 @@ public class JDlgVendas extends javax.swing.JDialog {
                 vendaProdutoMynDAO.delete(vendaProduto);
             }
 
-            Util.habilitar(true, jTxtCodigo, jCboCliente, jTxtValor, jFmtData, jCboFuncionario, jTxtNome, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd, jTable1);
+            Util.habilitar(true, jTxtCodigo, jCboCliente, jTxtValor, jFmtData, jCboFuncionario, jTxtTempoE, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd, jTable1);
 
         } else {
             Util.mensagem("Precisa ser feita uma pesquisa");
@@ -434,7 +434,7 @@ public class JDlgVendas extends javax.swing.JDialog {
             Util.mensagem("Exclusão Cancelada");
         }
         vendaProdutoControle.setList(new ArrayList());
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
+        Util.limparCampos(jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
@@ -536,7 +536,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTxtCodigo;
-    private javax.swing.JTextField jTxtNome;
+    private javax.swing.JTextField jTxtTempoE;
     private javax.swing.JTextField jTxtValor;
     // End of variables declaration//GEN-END:variables
 }

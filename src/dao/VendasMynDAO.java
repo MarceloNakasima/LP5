@@ -59,4 +59,37 @@ public class VendasMynDAO extends DAOAbstract{
         return (ArrayList) lista;
     }
     
+     public List listTempoE(String tempo){
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(VendasMyn.class);
+        crit.add(Restrictions.like("tempoEntregaMyn", "%"+tempo+"%"));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+     
+
+    public List listCliente(int cliente){
+        
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(VendasMyn.class);
+        crit.add(Restrictions.ge("clienteMyn", cliente));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    
+    }
+
+   public List listNomeCliente(String tempo, int cliente){
+        
+        session.beginTransaction();
+        Criteria crit = session.createCriteria(VendasMyn.class);
+        crit.add(Restrictions.like("tempoEntregaMyn", "%"+tempo+"%"));
+        crit.add(Restrictions.ge("clienteMyn", cliente));
+        List lista = crit.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
 }

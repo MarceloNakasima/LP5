@@ -150,24 +150,24 @@ private JDlgUsuarios jDlgUsuarios;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-if(!jTxtNome.getText().equals("")){
-        List lista= usuarios_DAO.listNome(jTxtNome.getText());
-        usuariosControle.setList(lista);
-} else{
-if (jTxtNome.getText().equals("") && jTxtNivel.getText().equals("")){
-    List list = usuarios_DAO.listNomeNivel(jTxtNome.getText(), Util.strInt(jTxtNivel.getText()));
-    usuariosControle.setList(list);
-}}
-if (jTxtNivel.getText().equals("")&& jTxtNome.getText().equals("") ){
-    List lista = usuarios_DAO.listNivel(Util.strInt(jTxtNivel.getText()));
-    usuariosControle.setList(lista);
-}
-
-else{
-if (!jTxtNivel.getText().equals("")){
-    List lista = usuarios_DAO.listNivel(Util.strInt(jTxtNivel.getText()));
-    usuariosControle.setList(lista);
-}}
+        if (!jTxtNome.getText().equals("")) {
+            List lista = usuarios_DAO.listNome(jTxtNome.getText());
+            usuariosControle.setList(lista);
+        } else {
+            if (jTxtNome.getText().equals("") && jTxtNivel.getText().equals("")) {
+                List list = usuarios_DAO.listNomeNivel(jTxtNome.getText(), Util.strInt(jTxtNivel.getText()));
+                usuariosControle.setList(list);
+            }
+        }
+        if (jTxtNivel.getText().equals("") && jTxtNome.getText().equals("")) {
+            List lista = usuarios_DAO.listNivel(Util.strInt(jTxtNivel.getText()));
+            usuariosControle.setList(lista);
+        } else {
+            if (!jTxtNivel.getText().equals("")) {
+                List lista = usuarios_DAO.listNivel(Util.strInt(jTxtNivel.getText()));
+                usuariosControle.setList(lista);
+            }
+        }
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
     /**

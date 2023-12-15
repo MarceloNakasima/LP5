@@ -5,37 +5,48 @@
  */
 package query;
 import bean.ClienteMyn;
+import bean.VendasMyn;
 import java.lang.String;
 import dao.ClienteMynDAO;
 import java.util.List;
 import tools.Util;
-import view.JDlgCliente;
 import controles.ClienteControle;
+import controles.VendasControle;
+import dao.VendasMynDAO;
 import java.util.HashMap;
 import java.util.Map;
+import view.JDlgVendas;
 
 /**
  *
  * @author u71665822198
  */
-public class JDlgConsultaCliente extends javax.swing.JDialog {
-private JDlgCliente jDlgCliente;
-    ClienteMynDAO cliente_DAO;
-    ClienteControle clienteControle;
+public class JDlgConsultaVenda extends javax.swing.JDialog {
+private JDlgVendas jDlgVendas;
+    VendasMynDAO vendas_DAO;
+    VendasControle vendasControle;
     /**
      * Creates new form JDlgConsultaUsuarios
      */
-    public JDlgConsultaCliente(java.awt.Frame parent, boolean modal) {
+    public JDlgConsultaVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-         initComponents();
-         setTitle("Consulta de Clientes");
-        setLocationRelativeTo(null);
-        
-        cliente_DAO = new   ClienteMynDAO();
-        clienteControle = new  ClienteControle();    
-        List lista = cliente_DAO.listAll();
-        clienteControle.setList(lista);
-        jTable1.setModel(clienteControle);
+    initComponents();
+    setTitle("Consulta de Vendas");
+    setLocationRelativeTo(null);
+    
+
+    vendas_DAO = new VendasMynDAO();
+    vendasControle = new VendasControle();    
+    List<VendasMyn> lista = vendas_DAO.listAll();  
+    vendasControle.setList(lista);
+    jTable1.setModel(vendasControle);
+
+   
+        ClienteMynDAO clienteMynDAO = new ClienteMynDAO();
+        List listaCbo = clienteMynDAO.listAll();
+        for (int i = 0; i < listaCbo.size(); i++) {
+            jCboCliente.addItem((ClienteMyn) listaCbo.get(i));
+        }
  
     }
 
@@ -52,10 +63,10 @@ private JDlgCliente jDlgCliente;
         jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTxtNome = new javax.swing.JTextField();
+        jTxtTempoE = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jCboSexo = new javax.swing.JComboBox<>();
+        jCboCliente = new javax.swing.JComboBox<ClienteMyn>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -68,7 +79,7 @@ private JDlgCliente jDlgCliente;
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Tempo de entrega");
 
         jBtnConsultar.setText("Consultar");
         jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -77,10 +88,7 @@ private JDlgCliente jDlgCliente;
             }
         });
 
-        jLabel2.setText("Sexo");
-
-        jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Prefiro não dizer" }));
-        jCboSexo.setSelectedIndex(-1);
+        jLabel2.setText("Cliente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,12 +98,12 @@ private JDlgCliente jDlgCliente;
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTxtTempoE, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addComponent(jCboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnConsultar)
                         .addGap(34, 34, 34))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -111,9 +119,9 @@ private JDlgCliente jDlgCliente;
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtTempoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar)
-                    .addComponent(jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
@@ -150,23 +158,23 @@ private JDlgCliente jDlgCliente;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-        if (!jTxtNome.getText().equals("")) {
-            List lista = cliente_DAO.listNome(jTxtNome.getText());
-            clienteControle.setList(lista);
+       if (!jTxtTempoE.getText().equals("")) {
+            List lista = vendas_DAO.listTempoE(jTxtTempoE.getText());
+            vendasControle.setList(lista);
         } else {
-            if (jTxtNome.getText().equals("") && jCboSexo.getSelectedItem().equals("")) {
-                if (jCboSexo.getSelectedItem().equals("Masculino"));
-                List list = cliente_DAO.listNomeSexo(jTxtNome.getText(), 1);
-                clienteControle.setList(list);
+            if (jTxtTempoE.getText().equals("") && jCboCliente.getSelectedItem().equals("")) {
+                if (jCboCliente.getSelectedItem().equals(""));
+                List list = vendas_DAO.listNomeCliente(jTxtTempoE.getText(), 1);
+                vendasControle.setList(list);
             }
         }
-        if (jCboSexo.getSelectedItem().equals("") && jTxtNome.getText().equals("")) {
-            List lista = cliente_DAO.listSexo(Util.strInt((String) jCboSexo.getSelectedItem()));
-            clienteControle.setList(lista);
+        if (jCboCliente.getSelectedItem().equals("") && jTxtTempoE.getText().equals("")) {
+            List lista = vendas_DAO.listCliente(Util.strInt((String) jCboCliente.getSelectedItem()));
+            vendasControle.setList(lista);
         } else {
-            if (!jCboSexo.getSelectedItem().equals("")) {
-                List lista = cliente_DAO.listSexo(Util.strInt((String) jCboSexo.getSelectedItem()));
-                clienteControle.setList(lista);
+            if (!jCboCliente.getSelectedItem().equals("")) {
+                List lista = vendas_DAO.listCliente(Util.strInt((String) jCboCliente.getSelectedItem()));
+                vendasControle.setList(lista);
             }
         }
     }//GEN-LAST:event_jBtnConsultarActionPerformed
@@ -188,21 +196,23 @@ private JDlgCliente jDlgCliente;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgConsultaCliente dialog = new JDlgConsultaCliente(new javax.swing.JFrame(), true);
+                JDlgConsultaVenda dialog = new JDlgConsultaVenda(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -216,7 +226,7 @@ private JDlgCliente jDlgCliente;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsultar;
-    private javax.swing.JComboBox<String> jCboSexo;
+    private javax.swing.JComboBox<ClienteMyn> jCboCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -224,6 +234,6 @@ private JDlgCliente jDlgCliente;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTxtNome;
+    private javax.swing.JTextField jTxtTempoE;
     // End of variables declaration//GEN-END:variables
 }
