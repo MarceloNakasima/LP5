@@ -75,7 +75,7 @@ public class FuncionarioMynDAO extends DAOAbstract{
    public List listData(Date data) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(FuncionarioMyn.class);
-        criteria.add(Restrictions.ge("dataAdmissaoMyn", data));
+        criteria.add(Restrictions.eq("dataAdmissaoMyn", data));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -83,7 +83,7 @@ public class FuncionarioMynDAO extends DAOAbstract{
      public List listNomeData(Date data, String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(FuncionarioMyn.class);
-        criteria.add(Restrictions.ge("dataAdmissaoMyn", data));
+        criteria.add(Restrictions.eq("dataAdmissaoMyn", data));
         criteria.add(Restrictions.ilike("nomeMyn", "%"+nome+"%"));
         List lista = criteria.list();
         session.getTransaction().commit();

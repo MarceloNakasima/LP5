@@ -4,13 +4,10 @@
  * and open the template in the editor.
  */
 package query;
-import bean.ClienteMyn;
 import bean.VendasMyn;
 import java.lang.String;
-import dao.ClienteMynDAO;
 import java.util.List;
 import tools.Util;
-import controles.ClienteControle;
 import controles.VendasControle;
 import dao.VendasMynDAO;
 import java.util.HashMap;
@@ -41,13 +38,6 @@ private JDlgVendas jDlgVendas;
     vendasControle.setList(lista);
     jTable1.setModel(vendasControle);
 
-   
-        ClienteMynDAO clienteMynDAO = new ClienteMynDAO();
-        List listaCbo = clienteMynDAO.listAll();
-        for (int i = 0; i < listaCbo.size(); i++) {
-            jCboCliente.addItem((ClienteMyn) listaCbo.get(i));
-        }
- 
     }
 
     /**
@@ -66,7 +56,7 @@ private JDlgVendas jDlgVendas;
         jTxtTempoE = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jCboCliente = new javax.swing.JComboBox<ClienteMyn>();
+        jTxtValor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -88,7 +78,7 @@ private JDlgVendas jDlgVendas;
             }
         });
 
-        jLabel2.setText("Cliente");
+        jLabel2.setText("Valor");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,7 +92,7 @@ private JDlgVendas jDlgVendas;
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnConsultar)
                         .addGap(34, 34, 34))
@@ -118,11 +108,12 @@ private JDlgVendas jDlgVendas;
                     .addComponent(jLabel1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtTempoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnConsultar)
-                    .addComponent(jCboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTxtTempoE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnConsultar))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -158,22 +149,32 @@ private JDlgVendas jDlgVendas;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-       if (!jTxtTempoE.getText().equals("")) {
+
+        
+        if (jTxtTempoE.getText().equals("") && jTxtValor.getText().equals("")) {
+            List lista = vendas_DAO.listAll();
+            vendasControle.setList(lista);
+        }
+        if (!jTxtTempoE.getText().equals("")) {
             List lista = vendas_DAO.listTempoE(jTxtTempoE.getText());
             vendasControle.setList(lista);
         } else {
-            if (jTxtTempoE.getText().equals("") && jCboCliente.getSelectedItem().equals("")) {
-                if (jCboCliente.getSelectedItem().equals(""));
-                List list = vendas_DAO.listNomeCliente(jTxtTempoE.getText(), 1);
+            if (jTxtTempoE.getText().equals("") && jTxtValor.getText().equals("")) {
+                Double valor = Util.strDouble(jTxtValor.getText());
+                List list = vendas_DAO.listTempoEValor(jTxtTempoE.getText(), (valor));
                 vendasControle.setList(list);
             }
         }
-        if (jCboCliente.getSelectedItem().equals("") && jTxtTempoE.getText().equals("")) {
-            List lista = vendas_DAO.listCliente(Util.strInt((String) jCboCliente.getSelectedItem()));
+        if (jTxtValor.getText().equals("") && jTxtTempoE.getText().equals("")) {
+            Double valor = Util.strDouble(jTxtValor.getText());
+            List lista = vendas_DAO.listValor(valor);
             vendasControle.setList(lista);
-        } else {
-            if (!jCboCliente.getSelectedItem().equals("")) {
-                List lista = vendas_DAO.listCliente(Util.strInt((String) jCboCliente.getSelectedItem()));
+            
+        } 
+        else {;
+            if (!jTxtValor.getText().equals("")) {
+                Double valor = Util.strDouble(jTxtValor.getText());
+                List lista = vendas_DAO.listValor(valor);
                 vendasControle.setList(lista);
             }
         }
@@ -226,7 +227,6 @@ private JDlgVendas jDlgVendas;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsultar;
-    private javax.swing.JComboBox<ClienteMyn> jCboCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -235,5 +235,6 @@ private JDlgVendas jDlgVendas;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTxtTempoE;
+    private javax.swing.JTextField jTxtValor;
     // End of variables declaration//GEN-END:variables
 }

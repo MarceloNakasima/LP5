@@ -155,17 +155,17 @@ private JDlgCliente jDlgCliente;
             clienteControle.setList(lista);
         } else {
             if (jTxtNome.getText().equals("") && jCboSexo.getSelectedItem().equals("")) {
-                if (jCboSexo.getSelectedItem().equals("Masculino"));
-                List list = cliente_DAO.listNomeSexo(jTxtNome.getText(), 1);
+                
+                List list = cliente_DAO.listNomeSexo(jTxtNome.getText(), jCboSexo.getSelectedIndex());
                 clienteControle.setList(list);
             }
         }
         if (jCboSexo.getSelectedItem().equals("") && jTxtNome.getText().equals("")) {
-            List lista = cliente_DAO.listSexo(Util.strInt((String) jCboSexo.getSelectedItem()));
+            List lista = cliente_DAO.listSexo(jCboSexo.getSelectedIndex());
             clienteControle.setList(lista);
         } else {
             if (!jCboSexo.getSelectedItem().equals("")) {
-                List lista = cliente_DAO.listSexo(Util.strInt((String) jCboSexo.getSelectedItem()));
+                List lista = cliente_DAO.listSexo(jCboSexo.getSelectedIndex());
                 clienteControle.setList(lista);
             }
         }

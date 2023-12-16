@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+import bean.Clientes;
 import bean.VendasMyn;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,23 +71,23 @@ public class VendasMynDAO extends DAOAbstract{
     
      
 
-    public List listCliente(int cliente){
+    public List listValor(Double valorMyn){
         
         session.beginTransaction();
         Criteria crit = session.createCriteria(VendasMyn.class);
-        crit.add(Restrictions.ge("clienteMyn", cliente));
+        crit.add(Restrictions.eq("valorMyn", valorMyn )); 
         List lista = crit.list();
         session.getTransaction().commit();
         return lista;
     
     }
 
-   public List listNomeCliente(String tempo, int cliente){
+   public List listTempoEValor(String tempo, Double valorMyn){
         
         session.beginTransaction();
         Criteria crit = session.createCriteria(VendasMyn.class);
         crit.add(Restrictions.like("tempoEntregaMyn", "%"+tempo+"%"));
-        crit.add(Restrictions.ge("clienteMyn", cliente));
+        crit.add(Restrictions.eq("valorMyn", valorMyn )); 
         List lista = crit.list();
         session.getTransaction().commit();
         return lista;

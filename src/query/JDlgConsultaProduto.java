@@ -145,24 +145,28 @@ private JDlgProduto jDlgProduto;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
-       if(!jTxtNome.getText().equals("")){
-        List lista= produto_DAO.listNome(jTxtNome.getText());
-        produtoControle.setList(lista);
-} else{
-if (jTxtNome.getText().equals("") && jTxtDesc.getText().equals("")){
-    List list = produto_DAO.listNomeDesc(jTxtNome.getText(), jTxtDesc.getText());
-    produtoControle.setList(list);
-}}
-if (jTxtDesc.getText().equals("")&& jTxtNome.getText().equals("") ){
-    List lista = produto_DAO.listDesc(jTxtDesc.getText());
-    produtoControle.setList(lista);
-}
-
-else{
-if (!jTxtDesc.getText().equals("")){
-    List lista = produto_DAO.listDesc(jTxtDesc.getText());
-    produtoControle.setList(lista);
-}}
+        if (jTxtNome.getText().equals("") && jTxtDesc.getText().equals("")) {
+            List lista = produto_DAO.listAll();
+            produtoControle.setList(lista);
+        }
+        if (!jTxtNome.getText().equals("")) {
+            List lista = produto_DAO.listNome(jTxtNome.getText());
+            produtoControle.setList(lista);
+        } else {
+            if (jTxtNome.getText().equals("") && jTxtDesc.getText().equals("")) {
+                List list = produto_DAO.listNomeDesc(jTxtNome.getText(), jTxtDesc.getText());
+                produtoControle.setList(list);
+            }
+        }
+        if (jTxtDesc.getText().equals("") && jTxtNome.getText().equals("")) {
+            List lista = produto_DAO.listDesc(jTxtDesc.getText());
+            produtoControle.setList(lista);
+        } else {
+            if (!jTxtDesc.getText().equals("")) {
+                List lista = produto_DAO.listDesc(jTxtDesc.getText());
+                produtoControle.setList(lista);
+            }
+        }
     }//GEN-LAST:event_jBtnConsultarActionPerformed
 
     /**

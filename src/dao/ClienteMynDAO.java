@@ -75,7 +75,7 @@ public class ClienteMynDAO extends DAOAbstract{
         
         session.beginTransaction();
         Criteria crit = session.createCriteria(ClienteMyn.class);
-        crit.add(Restrictions.ge("sexoMyn", sexo));
+        crit.add(Restrictions.eq("sexoMyn", sexo));
         List lista = crit.list();
         session.getTransaction().commit();
         return lista;
@@ -87,7 +87,7 @@ public class ClienteMynDAO extends DAOAbstract{
         session.beginTransaction();
         Criteria crit = session.createCriteria(ClienteMyn.class);
         crit.add(Restrictions.like("nomeMyn", "%"+nome+"%"));
-        crit.add(Restrictions.ge("sexoMyn", sexo));
+        crit.add(Restrictions.eq("sexoMyn", sexo));
         List lista = crit.list();
         session.getTransaction().commit();
         return lista;

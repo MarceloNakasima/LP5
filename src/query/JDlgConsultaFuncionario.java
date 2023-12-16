@@ -73,7 +73,6 @@ private JDlgFuncionario jDlgFuncionario;
         jBtnConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jFmtData = new javax.swing.JFormattedTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -97,13 +96,6 @@ private JDlgFuncionario jDlgFuncionario;
 
         jLabel2.setText("Data de Amissão");
 
-        jToggleButton1.setText("Limpar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,34 +109,25 @@ private JDlgFuncionario jDlgFuncionario;
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBtnConsultar)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jToggleButton1)))
-                .addGap(31, 31, 31))
+                        .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jBtnConsultar)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 17, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1)
-                        .addContainerGap())))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -180,11 +163,15 @@ private JDlgFuncionario jDlgFuncionario;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
- if (jTxtNome.getText().equals("") && jFmtData.getText().equals("")) {
+        if (jTxtNome.getText().equals("") && jFmtData.getText().equals("  /  /    ")) {
+            List lista = funcionario_DAO.listAll();
+            funcionarioControle.setList(lista);
+        }
+        if (jTxtNome.getText().equals("") && jFmtData.getText().equals("")) {
             List lista = funcionario_DAO.listAll();
             funcionarioControle.setList(lista);
         } else {
-            if (!jTxtNome.getText().equals("") && !jFmtData.getText().equals("")) {
+            if (!jTxtNome.getText().equals("") && !jFmtData.getText().equals("  /  /    ")) {
                 Date data = Util.strDate(jFmtData.getText());
                 List lista = funcionario_DAO.listNomeData(data, jTxtNome.getText());
                 funcionarioControle.setList(lista);
@@ -193,19 +180,15 @@ private JDlgFuncionario jDlgFuncionario;
                     List lista = funcionario_DAO.listNome(jTxtNome.getText());
                     funcionarioControle.setList(lista);
                 } else {
-                    if (!jFmtData.getText().equals("")) {  
-                    Date data = Util.strDate(jFmtData.getText());
-                    List lista = funcionario_DAO.listData(data);
-                    funcionarioControle.setList(lista);
+                    if (!jFmtData.getText().equals("  /  /    ")) {
+                        Date data = Util.strDate(jFmtData.getText());
+                        List lista = funcionario_DAO.listData(data);
+                        funcionarioControle.setList(lista);
                     }
                 }
             }
         }
     }//GEN-LAST:event_jBtnConsultarActionPerformed
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,7 +243,6 @@ private JDlgFuncionario jDlgFuncionario;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
 }

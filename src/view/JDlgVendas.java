@@ -10,6 +10,7 @@ import bean.FuncionarioMyn;
 import bean.ProdutoMyn;
 import bean.VendaprodutoMyn;
 import bean.VendasMyn;
+import bean.VendasProdutos;
 import controles.VendaProdutoControle;
 import dao.ClienteMynDAO;
 import dao.FuncionarioMynDAO;
@@ -35,6 +36,7 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private boolean incluindo;
 
+
     public VendasMyn venda;
     public VendasMynDAO VendasMynDAO;
     public FuncionarioMynDAO funcionarioMynDAO;
@@ -53,6 +55,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Venda");
         setLocationRelativeTo(null);
+
+        VendasMynDAO = new VendasMynDAO();
 
         Util.habilitar(false, jTxtCodigo, jFmtData, jCboCliente, jCboFuncionario, jTxtTempoE, jTxtValor, jBtnCancelar, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnExcluir, jBtnIncluir, jBtnAlterar, jBtnPesquisar);
@@ -92,9 +96,9 @@ public class JDlgVendas extends javax.swing.JDialog {
     }
 
     public void beanView(VendasMyn vendasMyn) {
-        jTxtCodigo.setText(String.valueOf(vendasMyn.getIdVendasMyn()));
-        jTxtTempoE.setText(String.valueOf(vendasMyn.getTempoEntregaMyn()));
-        jTxtValor.setText(String.valueOf(vendasMyn.getValorMyn()));
+        jTxtCodigo.setText(Util.intStr(vendasMyn.getIdVendasMyn()));
+        jTxtTempoE.setText((vendasMyn.getTempoEntregaMyn()));
+        jTxtValor.setText(Util.doubleStr(vendasMyn.getValorMyn()));
         jFmtData.setText(Util.dateStr(vendasMyn.getDataMyn()));
         jCboCliente.setSelectedItem(vendasMyn.getClienteMyn());
         jCboFuncionario.setSelectedItem(vendasMyn.getFuncionarioMyn());
@@ -345,11 +349,12 @@ public class JDlgVendas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        VendasMynDAO vendasMynDAO = new VendasMynDAO();
         venda = viewBean();
+        vendaProdutoMynDAO = new VendaProdutoMynDAO();
+
         if (incluindo) {
-            vendasMynDAO.insert(venda);
-            vendaProdutoMynDAO = new VendaProdutoMynDAO();
+            VendasMynDAO.insert(venda);
+            VendaProdutoMynDAO vendaProdutoMynDAO = new VendaProdutoMynDAO();
             VendaprodutoMyn vendaProduto;
             for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
                 vendaProduto = vendaProdutoControle.getBean(linha);
@@ -357,20 +362,29 @@ public class JDlgVendas extends javax.swing.JDialog {
                 vendaProdutoMynDAO.insert(vendaProduto);
             }
         } else {
-            vendasMynDAO.update(venda);
-            vendaProdutoMynDAO = new VendaProdutoMynDAO();
+            VendasMynDAO.update(venda);
+            VendaProdutoMynDAO vendaProdutoMynDAO = new VendaProdutoMynDAO();
             VendaprodutoMyn vendaProduto;
             for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
                 vendaProduto = vendaProdutoControle.getBean(linha);
                 vendaProduto.setVendasMyn(venda);
-                vendaProdutoMynDAO.insert(vendaProduto);
+                vendaProdutoMynDAO.delete(vendaProduto);
             }
+
+            for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
+                VendaprodutoMyn vendaProduto1 = vendaProdutoControle.getBean(linha);
+                vendaProduto1.setVendasMyn(venda);
+                vendaProdutoMynDAO.insert(vendaProduto1);
+            }
+
         }
-        vendaProdutoControle.setList(new ArrayList());
+        
         Util.habilitar(false, jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
         Util.limparCampos(jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
+        vendaProdutoControle.setList(new ArrayList());
 
+        venda = null;
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -384,7 +398,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         JDlgVendasPesquisa jDlgVendasPesquisa = new JDlgVendasPesquisa(null, true);
         jDlgVendasPesquisa.setTelaAnterior(this);
         jDlgVendasPesquisa.setVisible(true);
-        Util.habilitar(true, jBtnAlterar, jBtnCancelar, jBtnExcluir);
+        Util.habilitar(true, jBtnCancelar, jBtnAlterar, jBtnExcluir, jBtnConfirmar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -400,22 +415,13 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        venda = viewBean();
+         venda = viewBean();
         if (venda != null) {
-
-            vendaProdutoMynDAO = new VendaProdutoMynDAO();
-            VendaprodutoMyn vendaProduto;
-            for (int linha = 0; linha < jTable1.getRowCount(); linha++) {
-                vendaProduto = vendaProdutoControle.getBean(linha);
-                vendaProdutoMynDAO.delete(vendaProduto);
-            }
-
-            Util.habilitar(true, jTxtCodigo, jCboCliente, jTxtValor, jFmtData, jCboFuncionario, jTxtTempoE, jBtnConfirmar, jBtnCancelar, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd, jTable1);
-
+            Util.habilitar(true, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd, jTable1);
+            incluindo = false;
         } else {
             Util.mensagem("Precisa ser feita uma pesquisa");
         }
-        incluindo = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -435,6 +441,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         }
         vendaProdutoControle.setList(new ArrayList());
         Util.limparCampos(jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jTable1);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(false, jTxtCodigo, jTxtTempoE, jTxtValor, jFmtData, jCboCliente, jCboFuncionario, jBtnCancelar, jBtnCancelar, jBtnConfirmar, jBtnAlterar, jBtnExcluir, jBtnAlterarProd, jBtnIncluirProd, jBtnExcluirProd);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
@@ -456,11 +464,16 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
-        if (getSelectedRowProd() == -1) {
+        int selectedRow = getSelectedRowProd();
+        if (selectedRow == -1) {
             Util.mensagem("Selecione a linha");
         } else {
             if (Util.perguntar("Confirmar Exclusão do produto") == true) {
-                vendaProdutoControle.removeBean(getSelectedRowProd());
+                VendaprodutoMyn vendaProdutoMyn = vendaProdutoControle.getBean(selectedRow);
+                vendaProdutoControle.removeBean(selectedRow);
+                if (vendaProdutoMyn != null) {
+                    vendaProdutoMynDAO.delete(vendaProdutoMyn);
+                }
             }
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed

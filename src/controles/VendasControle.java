@@ -44,7 +44,7 @@ private List lista;
            return vendasMyn.getTempoEntregaMyn();
         } 
         if (columnIndex == 2) {
-           return vendasMyn.getClienteMyn();
+           return vendasMyn.getValorMyn();
         } 
         return "";
     }
@@ -58,7 +58,7 @@ private List lista;
             return "Tempo de Entrega";
         }
         if (column == 2){
-            return "Cliente";
+            return "Valor";
         }
         
         return "";  
